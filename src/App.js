@@ -38,17 +38,23 @@ function App() {
     });
   }
  //logica para completar y eliminar todos
+    function save(newtodo) {
+      const s =JSON.stringify(newtodo)
+      localStorage.setItem("TODOS_V1",s);
+      setTodos(newtodo)
+
+    }
     const completeTodo=(text)=>{
       const index =todos.findIndex (todo=>todo.text===text)
       const newtodo =[...todos];
       newtodo[index].completed=true
-      setTodos(newtodo)
+      save(newtodo)
      }
      const deleteTodo=(text)=>{
       const index =todos.findIndex (todo=>todo.text===text)
       const newtodo =[...todos];
       newtodo.splice(index,1)
-      setTodos(newtodo)
+      save(newtodo)
      }
 
   return (
