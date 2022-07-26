@@ -1,26 +1,45 @@
 import React from "react";
 import { AppUi } from "./appui/appui";
 
+function useLocalStorage(itemName,inicialvalue) {
+    //uso de localstorage
+    const localStorageitem = localStorage.getItem(itemName);
+    let parseditem;
+  
+    if (!localStorageitem) {
+    
+      localStorage.setItem(itemName, JSON.stringify(inicialvalue));
+      parseditem = inicialvalue;
+    } else {
+      
+      parseditem = JSON.parse(localStorageitem);
+    }
+    
+    //estado inicial de los todos
+    const [item,setitem]=React.useState(parseditem)
+  
+    //funcion para guardad los todos en localstorage
+    function save(newitem) {
+      const s =JSON.stringify(newitem)
+      localStorage.setItem(itemName,s);
+      setitem(newitem)
 
+    }
+
+    return[
+      item,
+      save,
+    ]
+
+}
 
 
 function App() {
-  //uso de localstorage
-  const localStorageTodos = localStorage.getItem('TODOS_V1');
-  let parsedTodos;
-
-  if (!localStorageTodos) {
-  
-    localStorage.setItem('TODOS_V1', JSON.stringify([]));
-    parsedTodos = [];
-  } else {
-    
-    parsedTodos = JSON.parse(localStorageTodos);
-  }
 
   //estados de la app
+  const [todos,save]=useLocalStorage("TODOS_V1",[])
   const [serch,setSerch]=React.useState("")
-  const [todos,setTodos]=React.useState(parsedTodos)
+ 
 
   //logica para contar en el titulo
   const contar=todos.filter(todos=>!!todos.completed).length;
@@ -38,12 +57,7 @@ function App() {
     });
   }
  //logica para completar y eliminar todos
-    function save(newtodo) {
-      const s =JSON.stringify(newtodo)
-      localStorage.setItem("TODOS_V1",s);
-      setTodos(newtodo)
-
-    }
+ 
     const completeTodo=(text)=>{
       const index =todos.findIndex (todo=>todo.text===text)
       const newtodo =[...todos];
@@ -57,8 +71,11 @@ function App() {
       save(newtodo)
      }
 
-  return (
-  <AppUi
+     
+
+  return [
+   
+      <AppUi
      contar={contar}
      total={total}
      serch ={serch}
@@ -67,7 +84,9 @@ function App() {
     completeTodo={completeTodo}
     deleteTodo={deleteTodo}
   />
-  );
+  ]
+
+  ;
 }
 
 export default App;
