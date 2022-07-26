@@ -2,7 +2,17 @@ import React from "react";
 import { AppUi } from "./appui/appui";
 
 function useLocalStorage(itemName,inicialvalue) {
-    //uso de localstorage
+  const [loading ,setLoading]=React.useState(true);
+  const [error,seterror]=React.useState(false)
+  
+  //estado inicial de los todos
+   const [item,setitem]=React.useState(inicialvalue);
+ 
+   //use effect
+   React.useEffect(()=>{
+    setTimeout(()=>{
+       //uso de localstorage
+   try {
     const localStorageitem = localStorage.getItem(itemName);
     let parseditem;
   
@@ -15,21 +25,35 @@ function useLocalStorage(itemName,inicialvalue) {
       parseditem = JSON.parse(localStorageitem);
     }
     
-    //estado inicial de los todos
-    const [item,setitem]=React.useState(parseditem)
+    setitem(parseditem)
+    setLoading(false);
+   } catch (error) {
+    seterror(error)
+   }
+
+    },1000)
+   });
+   
+   
   
     //funcion para guardad los todos en localstorage
     function save(newitem) {
-      const s =JSON.stringify(newitem)
+      try {
+        const s =JSON.stringify(newitem)
       localStorage.setItem(itemName,s);
-      setitem(newitem)
+      setitem(newitem);
+      } catch (error) {
+        seterror(error)
+      }
 
-    }
+    };
 
-    return[
+    return{
       item,
       save,
-    ]
+      loading,
+      error,
+    };
 
 }
 
@@ -37,7 +61,12 @@ function useLocalStorage(itemName,inicialvalue) {
 function App() {
 
   //estados de la app
-  const [todos,save]=useLocalStorage("TODOS_V1",[])
+  const {
+    item:todos,
+    save,
+    loading,
+    error
+  }=useLocalStorage("TODOS_V1",[])
   const [serch,setSerch]=React.useState("")
  
 
@@ -76,6 +105,8 @@ function App() {
   return [
    
       <AppUi
+      error={error}
+      loading={loading}
      contar={contar}
      total={total}
      serch ={serch}
