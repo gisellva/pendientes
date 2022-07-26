@@ -67,7 +67,8 @@ function App() {
     loading,
     error
   }=useLocalStorage("TODOS_V1",[])
-  const [serch,setSerch]=React.useState("")
+  const [serch,setSerch]=React.useState("");
+  
  
 
   //logica para contar en el titulo
@@ -85,7 +86,7 @@ function App() {
       return todoText.includes(searchText);
     });
   }
- //logica para completar y eliminar todos
+ //logica para completar , eliminar , añadir todos
  
     const completeTodo=(text)=>{
       const index =todos.findIndex (todo=>todo.text===text)
@@ -99,6 +100,7 @@ function App() {
       newtodo.splice(index,1)
       save(newtodo)
      }
+  
 
      
 
@@ -114,6 +116,9 @@ function App() {
     searchedTodos={searchedTodos}
     completeTodo={completeTodo}
     deleteTodo={deleteTodo}
+  
+  
+  
   />
   ]
 

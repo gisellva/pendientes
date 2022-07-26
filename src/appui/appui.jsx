@@ -4,8 +4,12 @@ import { TodoSearch } from "../serch/Serch";
 import { TodoList } from "../list/list";
 import { TodoItem } from "../item/items";
 import { CreateTodoButtom } from "../button/ButtonC";
+import  {Modal} from "../modal/modal";
+import Fo from "../formulario/formulario";
+
 
 function AppUi(
+  
     {
      contar,
      total,
@@ -16,9 +20,15 @@ function AppUi(
     deleteTodo,
     loading,
     error,
+   
+    
+    },
 
-    }
-    ) {
+    ) 
+    
+    {
+      const [o, s]=React.useState(false)
+      
     return(
         <div>
       <TodoCounter 
@@ -44,7 +54,22 @@ function AppUi(
              />
         ))}
       </TodoList>
-      <CreateTodoButtom />      
+      
+     
+      <CreateTodoButtom
+        s={s}
+      />
+      
+      
+      {!!o &&(
+        <Modal>
+         
+        
+       
+        </Modal>
+      )}
+      
+      
    </div>
     );
 }

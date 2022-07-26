@@ -1,9 +1,10 @@
-import react from "react";
+import React from "react";
 import "../button/boton.css"
 
-function CreateTodoButtom(){
-    function click(params) {
-        alert("aca va el modal")
+
+function CreateTodoButtom(prosp){
+    function click() {
+   prosp. s(preve=>!preve)
     }
     return(
         <button 
