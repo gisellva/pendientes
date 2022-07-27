@@ -5,7 +5,7 @@ import { TodoList } from "../list/list";
 import { TodoItem } from "../item/items";
 import { CreateTodoButtom } from "../button/ButtonC";
 import  {Modal} from "../modal/modal";
-import Fo from "../formulario/formulario";
+import {Form} from "../formulario/formulario"
 
 
 function AppUi(
@@ -20,6 +20,7 @@ function AppUi(
     deleteTodo,
     loading,
     error,
+    add,
    
     
     },
@@ -31,6 +32,7 @@ function AppUi(
       
     return(
         <div>
+        <h1>-pendientes-</h1>
       <TodoCounter 
         contar={contar}
         total={total}
@@ -42,7 +44,7 @@ function AppUi(
       <TodoList>
       {loading && <p className="loading">Estamos cargando.....</p>}
       {error && <p className="error">Hubo un error</p>}
-      {(!loading && !searchedTodos.length) && <p className="crea">Crea tu primer TODO</p>}
+      {(!loading && !searchedTodos.length) && <p className="crea">¡Crea un  TODO!</p>}
 
         {searchedTodos.map(todo => (
             <TodoItem
@@ -64,7 +66,10 @@ function AppUi(
       {!!o &&(
         <Modal>
          
-        
+        <Form
+          add ={add}
+          s={s}
+        />
        
         </Modal>
       )}

@@ -14,9 +14,7 @@ function TodoSearch({serch ,setSerch}){
         onChange={change}
         placeholder="escribe tu TODO" 
         className="TodoSearch" />,
-        <p>
-            {serch}
-        </p>
+       
     ];
 }
 export {TodoSearch};

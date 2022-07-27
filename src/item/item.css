@@ -1,12 +1,15 @@
 .TodoItem {
     background-color: #FAFAFA;
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 24px;
     box-shadow: 0px 5px 50px rgba(32, 35, 41, 0.15);
     text-align: center;
+    border-radius: 15px;
+    margin-left: 2px;
+    margin-right: 2px;
+    
   }
   
   .TodoItem-p {
@@ -40,10 +43,11 @@
   }
   .Icon-check--active {
     color: #4caf50;
+    
   }
   
   .Icon-delete {
-    position: absolute;
+   
     top: -24px;
     right: 0;
   }

@@ -1,6 +1,7 @@
 import React from "react";
 import { AppUi } from "./appui/appui";
 
+
 function useLocalStorage(itemName,inicialvalue) {
   const [loading ,setLoading]=React.useState(true);
   const [error,seterror]=React.useState(false)
@@ -100,7 +101,15 @@ function App() {
       newtodo.splice(index,1)
       save(newtodo)
      }
-  
+     const add=(text)=>{
+     
+      const newtodo =[...todos];
+      newtodo.push({
+        completed:false,
+        text
+      })
+      save(newtodo)
+     }
 
      
 
@@ -116,6 +125,7 @@ function App() {
     searchedTodos={searchedTodos}
     completeTodo={completeTodo}
     deleteTodo={deleteTodo}
+    add={add}
   
   
   
