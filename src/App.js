@@ -32,7 +32,7 @@ function useLocalStorage(itemName,inicialvalue) {
     seterror(error)
    }
 
-    },1000)
+    },3000)
    });
    
    
